@@ -1,24 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import styled from "styled-components";
+import CreateThread from "./components/CreateThread/CreateThread";
+import Header from "./components/Header/Header";
+import Homepage from "./components/Homepage/Homepage";
+import ThreadDetails from "./components/ThreadDetails/ThreadDetails";
+
+const ContentWrapper = styled.div`
+  background: #ccc;
+  height: 100vh;
+  padding: 5px;
+`;
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Header />
+      <ContentWrapper>
+        <Switch>
+          <Route exact path="/">
+            <Homepage />
+          </Route>
+          <Route path="/submit">
+            <CreateThread />
+          </Route>
+          <Route path="/threads/:id">
+            <ThreadDetails />
+          </Route>
+        </Switch>
+      </ContentWrapper>
+    </Router>
   );
 }
 
