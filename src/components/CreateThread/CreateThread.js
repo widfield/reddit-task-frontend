@@ -24,6 +24,8 @@ const CreateThread = () => {
   const history = useHistory();
   const handleInputChange = (e) => setTitle(e.target.value);
 
+  const currentUser = window.localStorage.getItem("userName");
+
   const handleTextareaChange = (e) => setContent(e.target.value);
 
   const handleSubmit = async () => {
@@ -39,16 +41,16 @@ const CreateThread = () => {
           content: content,
           id: uuidv4(),
           score: 0,
-          createdBy: "TestUser",
+          createdBy: currentUser || "anonymous",
           created: new Date(),
         }),
-      });
-      history.push("/");
+      })
+        .then((res) => res.json())
+        .then((data) => history.push(`/threads/${data.id}`));
+
       setIsSubmitting(false);
     } catch (error) {}
   };
-
-
 
   return (
     <Grid container direction="row" justifyContent="center" spacing={2}>

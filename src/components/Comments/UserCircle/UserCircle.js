@@ -14,7 +14,7 @@ const Circle = styled.div`
 `;
 
 const UserCircle = ({ name }) => {
-  const userInitial = name[0];
+  const userInitial = name[0].toUpperCase();
   return <Circle>{userInitial}</Circle>;
 };
 

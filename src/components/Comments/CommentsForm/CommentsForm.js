@@ -20,10 +20,17 @@ const ButtonContainer = styled.div`
   justify-content: flex-end;
 `;
 
+const StyledP = styled.p`
+  font-size: 14px;
+  color: gray;
+`;
+
 const CommentsForm = ({ threadId, onCommentCreate }) => {
   const [content, setContent] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const handleTextareaChange = (e) => setContent(e.target.value);
+
+  const currentUser = window.localStorage.getItem("userName");
 
   const handleSubmit = async () => {
     try {
@@ -37,14 +44,14 @@ const CommentsForm = ({ threadId, onCommentCreate }) => {
           content: content,
           id: uuidv4(),
           score: 0,
-          createdBy: "TestUser",
+          createdBy: currentUser || "anonymous",
           created: new Date(),
           threadId,
         }),
       })
         .then((res) => res.json())
         .then((data) => onCommentCreate(data));
-      //history.push("/");
+
       setIsSubmitting(false);
     } catch (error) {}
   };
@@ -53,6 +60,7 @@ const CommentsForm = ({ threadId, onCommentCreate }) => {
     <Grid container direction="row" justifyContent="center" spacing={2}>
       <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
         <FormWrapper>
+          <StyledP>Comment as {currentUser || "anonymous"}</StyledP>
           <FieldContainer>
             <Textarea
               placeholder="Text"

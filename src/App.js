@@ -4,10 +4,10 @@ import CreateThread from "./components/CreateThread/CreateThread";
 import Header from "./components/Header/Header";
 import Homepage from "./components/Homepage/Homepage";
 import ThreadDetails from "./components/ThreadDetails/ThreadDetails";
+import './App.css';
 
 const ContentWrapper = styled.div`
-  background: #ccc;
-  height: 100vh;
+  
   padding: 5px;
 `;
 
